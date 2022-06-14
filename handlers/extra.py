@@ -19,6 +19,7 @@ async def ban_for_bad_words(message: types.Message):
             #                           until_date=datetime.now() + timedelta(hours=1))
             await bot.delete_message(message.chat.id,
                                      message.message_id)
+    await message.reply("Unregistered command or text")
 
 
 def register_handlers_extra(dp: Dispatcher):
