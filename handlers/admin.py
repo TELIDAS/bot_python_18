@@ -4,6 +4,8 @@ from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from config import bot
 from keyboards import admin_kb
+from database import bot_db
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 class ShowsAdminStates(StatesGroup):
@@ -61,7 +63,32 @@ async def load_description(message: types.Message,
                            state: FSMContext):
     async with state.proxy() as data:
         data['description'] = message.text
-        await message.reply(str(data))
+        # await message.reply(str(data))
+    await bot_db.sql_insert(state)
+    await message.reply("Data saved")
+    await state.finish()
+
+
+async def complete_delete(call: types.CallbackQuery):
+    await bot_db.sql_delete(call.data.replace("delete ", ""))
+    await call.answer(text=f'{call.data.replace("delete ", "")} Deleted',
+                      show_alert=True)
+
+
+async def delete_data(message: types.Message):
+    selected_data = await bot_db.sql_select_for_delete()
+    for result in selected_data:
+        await bot.send_photo(
+            chat_id=message.chat.id,
+            photo=result[0],
+            caption=f'Title: {result[1]}\n Description: {result[2]}',
+            reply_markup=InlineKeyboardMarkup().add(
+                InlineKeyboardButton(
+                    f'delete: {result[1]}',
+                    callback_data=f'delete {result[1]}'
+                )
+            )
+        )
 
 
 def register_handler_admin(dp: Dispatcher):
@@ -82,3 +109,7 @@ def register_handler_admin(dp: Dispatcher):
     dp.register_message_handler(load_description,
                                 content_types=['text'],
                                 state=ShowsAdminStates.description)
+    dp.register_callback_query_handler(
+        complete_delete,
+        lambda call: call.data and call.data.startswith("delete "))
+    dp.register_message_handler(delete_data, commands=['delete'])
