@@ -8,13 +8,26 @@ def sql_create():
     cursor = connection.cursor()
     if connection:
         print("Database connected successfully")
+
     create_table_query = """
     CREATE TABLE IF NOT EXISTS tvshow
     (photo TEXT, title TEXT PRIMARY KEY, description TEXT) 
     """
-    connection.execute(
-        create_table_query
-    )
+
+    create_shows_table_command = """
+    CREATE TABLE IF NOT EXISTS doramy
+    (link TEXT, title TEXT, img TEXT)
+    """
+
+    connection.execute(create_table_query)
+    connection.execute(create_shows_table_command)
+    connection.commit()
+
+
+async def sql_insert_doramy(data):
+    cursor.execute("""
+    INSERT INTO doramy VALUES (?, ?, ?)
+    """, tuple(data.values(), ))
     connection.commit()
 
 

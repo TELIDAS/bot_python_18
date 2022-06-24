@@ -5,6 +5,7 @@ from aiogram import types, Dispatcher
 
 from database import bot_db
 from keyboards import client_kb
+from parser import scrapy_doramy
 
 
 async def hello(message: types.Message):
@@ -22,7 +23,8 @@ async def help(message: types.Message):
                         f'questions, quiz has continue by clicking '
                         f'button *Следующая викторина*\n'
                         f'2. Also u can share location or info about u\n'
-                        f'3. /shows U can watch collection of TV-Shows')
+                        f'3. /shows U can watch collection of TV-Shows\n'
+                        f'4. /parser u can see all new shows from doramy site')
 
 
 async def quiz_1(message: types.Message):
@@ -54,8 +56,18 @@ async def get_all_tvshows(message: types.Message):
     await bot_db.sql_select(message)
 
 
+async def parser_doramy(message: types.Message):
+    data = scrapy_doramy.scrapy_script()
+    for shows in data:
+        await bot_db.sql_insert_doramy(shows)
+        await bot.send_message(message.chat.id,
+                               shows)
+
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(hello, commands=['start'])
     dp.register_message_handler(help, commands=['help'])
     dp.register_message_handler(quiz_1, commands=['quiz1'])
     dp.register_message_handler(get_all_tvshows, commands=['shows'])
+    dp.register_message_handler(parser_doramy, commands=['parser'])
