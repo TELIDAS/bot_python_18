@@ -5,6 +5,13 @@ from database import bot_db
 import asyncio
 
 
+""""
+heroku ps:scale worker=1
+heroku ps:scale worker=0
+
+heroku logs --tail --app pythongeekbot18
+"""
+
 async def on_startup(_):
     bot_db.sql_create()
     print("Bot is online")
