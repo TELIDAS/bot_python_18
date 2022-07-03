@@ -22,12 +22,12 @@ async def help(message: types.Message):
                            f'Also i have some commands:\n'
                            f'1. /quiz1 this command for hilarious quiz '
                            f'questions, quiz has continue by clicking '
-                           f'button *Следующая викторина*\n'
-                           f'2. Also u can share location or info about u\n'
-                           f'3. /shows U can watch collection of TV-Shows\n'
-                           f'4. /parser parse and see from doramy site\n'
-                           f'5. /doramy u can see all parsed shows from doramy site\n',
-                           f'6. /register u can register your data to bot')
+                           f'button *Следующая викторина*\n')
+                           # f'2. Also u can share location or info about u\n'
+                           # f'3. /shows U can watch collection of TV-Shows\n'
+                           # f'4. /parser parse and see from doramy site\n'
+                           # f'5. /doramy u can see all parsed shows from doramy site\n',
+                           # f'6. /register u can register your data to bot')
 
 
 async def quiz_1(message: types.Message):
