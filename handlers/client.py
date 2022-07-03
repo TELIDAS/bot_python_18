@@ -15,9 +15,9 @@ async def hello(message: types.Message):
 
 
 async def help(message: types.Message):
-    await message.reply(f'Hello {message.from_user.username}! 😁\n'
+    await message.reply(f'Hello {message.from_user.username}! \n'
                         f'I\'m your bot for filtering messages, so that\'s why be careful,'
-                        f' i can ban you for curse words 😈\n'
+                        f' i can ban you for curse words \n'
                         f'Also i have some commands:\n'
                         f'1. /quiz1 this command for hilarious quiz '
                         f'questions, quiz has continue by clicking '
