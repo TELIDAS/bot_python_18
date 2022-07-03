@@ -22,7 +22,7 @@ async def help(message: types.Message):
                            f'Also i have some commands:\n'
                            f'1. /quiz1 this command for hilarious quiz '
                            f'questions, quiz has continue by clicking '
-                           f'button *Следующая викторина*\n')
+                           f'button Следующая викторина\n')
 
     await bot.send_message(message.chat.id,
                            f'2. Also u can share location or info about u\n'
