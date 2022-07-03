@@ -17,22 +17,22 @@ async def hello(message: types.Message):
 async def help(message: types.Message):
     await bot.send_message(
         message.chat.id,
-        f"Hello ! \n"
-        f"I'm your bot for filtering messages, so that's why be careful,"
-        f" i can ban you for curse words \n"
-        f"Also i have some commands:\n"
-        f"1. /quiz1 this command for hilarious quiz "
-        f"questions, quiz has continue by clicking "
-        f"button Следующая викторина\n",
+        "Hello ! \n"
+        "I'm your bot for filtering messages, so that's why be careful,"
+        " i can ban you for curse words \n"
+        "Also i have some commands:\n"
+        "1. /quiz1 this command for hilarious quiz "
+        "questions, quiz has continue by clicking "
+        "button Следующая викторина\n",
     )
 
     await bot.send_message(
         message.chat.id,
-        f"2. Also u can share location or info about u\n"
-        f"3. /shows U can watch collection of TV-Shows\n"
-        f"4. /parser parse and see from doramy site\n"
-        f"5. /doramy u can see all parsed shows from doramy site\n",
-        f"6. /register u can register your data to bot",
+        "2. Also u can share location or info about u\n"
+        "3. /shows U can watch collection of TV-Shows\n"
+        "4. /parser parse and see from doramy site\n"
+        "5. /doramy u can see all parsed shows from doramy site\n",
+        "6. /register u can register your data to bot",
     )
 
 
