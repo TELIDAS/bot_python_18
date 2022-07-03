@@ -24,7 +24,7 @@ async def help(message: types.Message):
                         f'button *Следующая викторина*\n'
                         f'2. Also u can share location or info about u\n'
                         f'3. /shows U can watch collection of TV-Shows\n'
-                        f'4. /parser parse and see from doramy site'
+                        f'4. /parser parse and see from doramy site\n'
                         f'5. /doramy u can see all parsed shows from doramy site')
 
 
@@ -58,7 +58,7 @@ async def get_all_tvshows(message: types.Message):
 
 
 async def get_all_doramy(message: types.Message):
-    await bot_db.sql_insert_doramy(message)
+    await bot_db.sql_select_doramy(message)
 
 
 async def parser_doramy(message: types.Message):
