@@ -3,7 +3,7 @@ from aiogram.types import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot
 from aiogram import types, Dispatcher
 
-from database import bot_db
+from database import bot_db, psql_db
 from keyboards import client_kb
 from parser import scrapy_doramy
 
@@ -25,7 +25,8 @@ async def help(message: types.Message):
                         f'2. Also u can share location or info about u\n'
                         f'3. /shows U can watch collection of TV-Shows\n'
                         f'4. /parser parse and see from doramy site\n'
-                        f'5. /doramy u can see all parsed shows from doramy site')
+                        f'5. /doramy u can see all parsed shows from doramy site\n',
+                        f'6. /register u can register your data to bot')
 
 
 async def quiz_1(message: types.Message):
@@ -69,6 +70,17 @@ async def parser_doramy(message: types.Message):
                                shows)
 
 
+async def registration(message: types.Message):
+    id = message.from_user.id
+    username = message.from_user.username
+    full_name = message.from_user.full_name
+
+    psql_db.cursor.execute(
+        "INSERT INTO users (id, username, fullname) VALUES (%s, %s, %s)", (id, username, full_name), )
+    psql_db.db.commit()
+    await message.reply("Registration successful")
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(hello, commands=['start'])
     dp.register_message_handler(help, commands=['help'])
@@ -76,3 +88,4 @@ def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(get_all_tvshows, commands=['shows'])
     dp.register_message_handler(get_all_doramy, commands=['doramy'])
     dp.register_message_handler(parser_doramy, commands=['parser'])
+    dp.register_message_handler(registration, commands=['register'])

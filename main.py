@@ -3,7 +3,7 @@ from decouple import config
 from config import bot, dp, URL
 from aiogram.utils import executor
 from handlers import client, callback_quiz, extra, admin, notification, inline
-from database import bot_db
+from database import bot_db, psql_db
 import asyncio
 
 """"
@@ -22,6 +22,7 @@ heroku logs --tail --app pythongeekbot18
 async def on_startup(_):
     await bot.set_webhook(URL)
     bot_db.sql_create()
+    psql_db.psql_create()
     print("Bot is online")
     asyncio.create_task(notification.scheduler())
 
