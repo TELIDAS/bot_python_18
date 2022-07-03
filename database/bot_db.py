@@ -46,6 +46,13 @@ async def sql_select(message):
                              caption=f'Title: {result[1]}\n'
                                      f'Description: {result[2]}')
 
+async def sql_select_doramy(message):
+    for result in cursor.execute("""SELECT * FROM doramy""").fetchall():
+        await bot.send_photo(message.chat.id,
+                             result[2],
+                             caption=f'Title: {result[0]}\n'
+                                     f'Description: {result[1]}')
+
 
 async def sql_select_for_delete():
     return cursor.execute("""SELECT * FROM tvshow""").fetchall()
