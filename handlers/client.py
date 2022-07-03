@@ -16,7 +16,7 @@ async def hello(message: types.Message):
 
 async def help(message: types.Message):
     await bot.send_message(message.chat.id,
-                           f'Hello {message.from_user.username}! \n'
+                           f'Hello ! \n'
                            f'I\'m your bot for filtering messages, so that\'s why be careful,'
                            f' i can ban you for curse words \n'
                            f'Also i have some commands:\n'
