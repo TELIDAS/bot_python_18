@@ -35,7 +35,7 @@ def scrapy_script():
     html = get_requests(URL)
     if html.status_code == 200:
         shows = []
-        for page in range(1, 71):
+        for page in range(1, 7):
             html = get_requests(f"https://doramy.club/genre/fentezi/page/{page}")
             shows.extend(get_data(html.text))
         return shows
