@@ -11,9 +11,7 @@ async def inline_wiki(query: types.InlineQuery):
             id=result_id,
             title="Wikipedia: ",
             url=links,
-            input_message_content=types.InputTextMessageContent(
-                message_text=links
-            )
+            input_message_content=types.InputTextMessageContent(message_text=links),
         )
     ]
     await query.answer(articles, cache_time=2, is_personal=True)

@@ -7,10 +7,7 @@ from config import bot
 # 1150258083
 async def standup():
     ADMIN_ID = 1150258083
-    await bot.send_message(
-        chat_id=ADMIN_ID,
-        text="Не забудь написать standup"
-    )
+    await bot.send_message(chat_id=ADMIN_ID, text="Не забудь написать standup")
 
 
 async def scheduler():
